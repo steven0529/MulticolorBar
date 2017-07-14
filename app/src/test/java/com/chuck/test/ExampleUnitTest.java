@@ -1,7 +1,5 @@
 package com.chuck.test;
 
-import com.chuck.multicolorbar.ColorDictionary;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotEquals;

@@ -1,4 +1,4 @@
-package com.chuck.multicolorbar;
+package com.chuck.test;
 
 import java.util.Random;
 

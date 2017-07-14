@@ -58,7 +58,7 @@ public class MulticolorBar extends View {
         MulticolorBarItem prevItem = null;
         int idx = 0;
         for (MulticolorBarItem item: itemsMap.keySet()) {
-            paint.setColor(Color.parseColor("#" + ColorDictionary.getColorByIndex(idx)));
+            paint.setColor(Color.parseColor(item.getColorHex()));
             Rect rect;
             if (idx == 0) {
                 rect = itemsMap.get(item);

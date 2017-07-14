@@ -14,6 +14,7 @@
         custom:showLegend="true"
         custom:multicolorBarSize="30dp"
         custom:titleTextSize="20dp"
+        custom:legendTextSize="14dp"
         android:layout_margin="5dp"
         android:layout_centerInParent="true"/>
 

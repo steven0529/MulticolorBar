@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
         MulticolorBarView multicolorBar = (MulticolorBarView) findViewById(R.id.multicolorBarView);
 
         List<Product> products = new ArrayList<>();
-        products.add(new Product("Prod 1", 1800));
-        products.add(new Product("Prod 2", 2098));
-        products.add(new Product("Prod 3", 10245));
-        products.add(new Product("Prod 4", 3278));
-        products.add(new Product("Prod 5", 3000));
-        products.add(new Product("Prod 6", 2000));
+        products.add(new Product("Prod 1", 1800, "bags", "#" + ColorDictionary.getColorByIndex(0)));
+        products.add(new Product("Prod 2", 2098, "bags", "#" + ColorDictionary.getColorByIndex(1)));
+        products.add(new Product("Prod 3", 10245, "bags", "#" + ColorDictionary.getColorByIndex(2)));
+        products.add(new Product("Prod 4", 3278, "bags", "#" + ColorDictionary.getColorByIndex(3)));
+        products.add(new Product("Prod 5", 3000, "bags", "#" + ColorDictionary.getColorByIndex(4)));
+        products.add(new Product("Prod 6", 2000, "bags", "#" + ColorDictionary.getColorByIndex(5)));
         multicolorBar.setMulticolorBarAdapter(new ProductAdapter(products));
 
         int total = 0;

@@ -8,4 +8,7 @@ public interface MulticolorBarItem {
 
     int getItemValue();
     String getItemName();
+    String getColorHex();
+    String getUnit();
+
 }

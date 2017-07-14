@@ -2,11 +2,13 @@ package com.chuck.multicolorbar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +20,6 @@ public class MulticolorBarView extends LinearLayout {
 
     private TextView tvTitle;
     private MulticolorBar multicolorBar;
-    private RecyclerView recyclerView;
     private boolean mShowLegend;
 
     public MulticolorBarView(Context context, AttributeSet attrs) {
@@ -37,7 +38,6 @@ public class MulticolorBarView extends LinearLayout {
 
         tvTitle = new TextView(context);
         multicolorBar = new MulticolorBar(context, attrs);
-        recyclerView = new RecyclerView(context);
 
         TypedArray typedArray = context.obtainStyledAttributes(
                 attrs,
@@ -48,9 +48,6 @@ public class MulticolorBarView extends LinearLayout {
         LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         titleLayoutParams.setMargins(20, 0, 0, 30);
-        LinearLayout.LayoutParams legendLayoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        titleLayoutParams.setMargins(20, 0, 20, 0);
 
         LinearLayout.LayoutParams multicolorBarLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -60,7 +57,6 @@ public class MulticolorBarView extends LinearLayout {
 
         addView(tvTitle, titleLayoutParams);
         addView(multicolorBar, multicolorBarLayoutParams);
-        addView(recyclerView, legendLayoutParams);
     }
 
     public void setShowLegend(boolean mShowLegend) {
@@ -75,20 +71,23 @@ public class MulticolorBarView extends LinearLayout {
 
     private void displayLegend() {
         if (mShowLegend) {
-            setupLegendLayoutManager();
-            LegendAdapter<MulticolorBarItem> legendAdapter =
-                    new LegendAdapter<>(multicolorBar.getMulticolorBarAdapter().getMulticolorBarItems());
-            recyclerView.setAdapter(legendAdapter);
-            legendAdapter.notifyDataSetChanged();
+            for (int i = 0; i < multicolorBar.getMulticolorBarAdapter().getMulticolorBarItems().size(); i++) {
+                MulticolorBarItem item = (MulticolorBarItem) multicolorBar
+                        .getMulticolorBarAdapter().getMulticolorBarItems().get(i);
+                LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.item_legend, null);
+                TextView tvItemName = (TextView) view.findViewById(R.id.tv_item_name);
+                tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + ") "
+                        + item.getUnit());
+                ImageView ivItemColor = (ImageView) view.findViewById(R.id.iv_item_colorbox);
+                ivItemColor.setBackgroundColor(Color.parseColor(item.getColorHex()));
+                addView(view);
+            }
         }
     }
 
     public void setTitle(String title) {
         tvTitle.setText(title);
-    }
-
-    private void setupLegendLayoutManager() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
 }

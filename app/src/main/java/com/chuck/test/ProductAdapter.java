@@ -27,6 +27,16 @@ public class ProductAdapter extends MulticolorBarAdapter<Product> {
             public String getItemName() {
                 return product.getName();
             }
+
+            @Override
+            public String getColorHex() {
+                return product.getColor();
+            }
+
+            @Override
+            public String getUnit() {
+                return product.getUnit();
+            }
         };
     }
 }
