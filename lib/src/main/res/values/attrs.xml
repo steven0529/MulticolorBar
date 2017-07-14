@@ -1,0 +1,9 @@
+<resources>
+
+    <declare-styleable name="MulticolorBarView">
+        <attr name="title" format="string"/>
+        <attr name="multicolorBarSize" format="dimension"/>
+        <attr name="titleTextSize" format="dimension"/>
+        <attr name="showLegend" format="boolean"/>
+    </declare-styleable>
+</resources>
