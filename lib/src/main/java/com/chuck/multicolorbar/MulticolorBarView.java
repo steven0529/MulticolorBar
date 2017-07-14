@@ -52,10 +52,14 @@ public class MulticolorBarView extends LinearLayout {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         titleLayoutParams.setMargins(20, 0, 20, 0);
 
+        LinearLayout.LayoutParams multicolorBarLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        multicolorBarLayoutParams.setMargins(0, 20, 0, 20);
+
         mShowLegend = typedArray.getBoolean(R.styleable.MulticolorBarView_showLegend, false);
 
         addView(tvTitle, titleLayoutParams);
-        addView(multicolorBar);
+        addView(multicolorBar, multicolorBarLayoutParams);
         addView(recyclerView, legendLayoutParams);
     }
 
