@@ -15,7 +15,7 @@ allprojects {
 2. Add the dependency
 ```groovy
 dependencies {
-    compile 'com.github.steven0529:LTARecyclerAdapter:-SNAPSHOT'
+    compile 'com.github.steven0529:MulticolorBar:0.1.0'
 }
 ```
 
