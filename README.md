@@ -1,7 +1,7 @@
 # MulticolorBar
 A Subdivided Multicolor bar with legend for Android
 
-<img src="https://raw.githubusercontent.com/steven0529/MulticolorBar/master/multicolorbar.png" height=1280 width=720 >
+<img src="https://raw.githubusercontent.com/steven0529/MulticolorBar/master/multicolorbar.png" height=640 width=360 >
 
 # Usage
 1. Add it in your root build.gradle at the end of repositories:
