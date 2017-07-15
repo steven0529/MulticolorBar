@@ -6,5 +6,10 @@
         <attr name="titleTextSize" format="dimension"/>
         <attr name="showLegend" format="boolean"/>
         <attr name="legendTextSize" format="dimension"/>
+        <attr name="titleMargin" format="dimension"/>
+        <attr name="titleMarginTop" format="dimension"/>
+        <attr name="titleMarginBottom" format="dimension"/>
+        <attr name="titleMarginLeft" format="dimension"/>
+        <attr name="titleMarginRight" format="dimension"/>
     </declare-styleable>
 </resources>

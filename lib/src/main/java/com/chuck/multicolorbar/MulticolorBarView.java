@@ -40,16 +40,11 @@ public class MulticolorBarView extends LinearLayout {
         tvTitle = new TextView(context);
         multicolorBar = new MulticolorBar(context, attrs);
 
+        LayoutParams titleLayoutParams = applyTitleAttributeSet(context, attrs);
+
         TypedArray typedArray = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.MulticolorBarView);
-        tvTitle.setText(typedArray.getString(R.styleable.MulticolorBarView_title));
-        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                typedArray.getDimension(R.styleable.MulticolorBarView_titleTextSize, 14f));
-        LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        titleLayoutParams.setMargins(20, 0, 0, 30);
-
         LinearLayout.LayoutParams multicolorBarLayoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         multicolorBarLayoutParams.setMargins(0, 20, 0, 20);
@@ -77,6 +72,29 @@ public class MulticolorBarView extends LinearLayout {
     public void setMulticolorBarAdapter(MulticolorBarAdapter multicolorBarAdapter) {
         multicolorBar.setMulticolorBarAdapter(multicolorBarAdapter);
         displayLegend();
+    }
+
+    private LayoutParams applyTitleAttributeSet(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(
+                attrs,
+                R.styleable.MulticolorBarView);
+        tvTitle.setText(typedArray.getString(R.styleable.MulticolorBarView_title));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                typedArray.getDimension(R.styleable.MulticolorBarView_titleTextSize, 14f));
+
+        int margin = typedArray.getLayoutDimension(R.styleable.MulticolorBarView_titleMargin, 0);
+        int marginTop = typedArray.getLayoutDimension(R.styleable.MulticolorBarView_titleMarginTop, 0);
+        int marginBottom = typedArray.getLayoutDimension(R.styleable.MulticolorBarView_titleMarginBottom, 0);
+        int marginLeft = typedArray.getLayoutDimension(R.styleable.MulticolorBarView_titleMarginLeft, 0);
+        int marginRight = typedArray.getLayoutDimension(R.styleable.MulticolorBarView_titleMarginRight, 0);
+
+        LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        if (margin != 0)
+            titleLayoutParams.setMargins(margin, margin, margin, margin);
+        else
+            titleLayoutParams.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+        return titleLayoutParams;
     }
 
     private void displayLegend() {
