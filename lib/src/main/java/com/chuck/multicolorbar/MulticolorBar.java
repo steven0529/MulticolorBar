@@ -54,23 +54,26 @@ public class MulticolorBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawRect(viewRect, mBackgroundPaint);
-        List<MulticolorBarItem> multicolorBarItemList = multicolorBarAdapter.getMulticolorBarItems();
-        for (int i = 0; i < multicolorBarItemList.size(); i++) {
-            MulticolorBarItem item = multicolorBarItemList.get(i);
 
-            paint.setColor(Color.parseColor(item.getColorHex()));
-            Rect rect = itemsRect.get(i);
-            if (i == 0) {
-                rect.right = computeItemDrawWidth(item);
-            } else if (i == multicolorBarItemList.size() && mHasDefinedMax) {
-                rect.left = itemsRect.get(i - 1).right;
-                rect.right = itemsRect.get(i - 1).right + mBackgroundRect.right;
-            } else {
-                rect.left = itemsRect.get(i - 1).right;
-                rect.right = itemsRect.get(i - 1).right + computeItemDrawWidth(item);
+        if (multicolorBarAdapter != null) {
+            List<MulticolorBarItem> multicolorBarItemList = multicolorBarAdapter.getMulticolorBarItems();
+            for (int i = 0; i < multicolorBarItemList.size(); i++) {
+                MulticolorBarItem item = multicolorBarItemList.get(i);
+
+                paint.setColor(Color.parseColor(item.getColorHex()));
+                Rect rect = itemsRect.get(i);
+                if (i == 0) {
+                    rect.right = computeItemDrawWidth(item);
+                } else if (i == multicolorBarItemList.size() && mHasDefinedMax) {
+                    rect.left = itemsRect.get(i - 1).right;
+                    rect.right = itemsRect.get(i - 1).right + mBackgroundRect.right;
+                } else {
+                    rect.left = itemsRect.get(i - 1).right;
+                    rect.right = itemsRect.get(i - 1).right + computeItemDrawWidth(item);
+                }
+                rect.bottom = mHeight;
+                canvas.drawRect(rect, paint);
             }
-            rect.bottom = mHeight;
-            canvas.drawRect(rect, paint);
         }
     }
 
