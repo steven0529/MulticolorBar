@@ -1,7 +1,7 @@
 # MulticolorBar
 A Subdivided Multicolor bar with legend for Android
 
-![Alt text](/multicolorbar.png?raw=true "Example screenshot")
+![Alt text](/multicolorbar.png?raw=true "Example screenshot"){:height="100px" width="48px"}
 
 # Usage
 1. Add it in your root build.gradle at the end of repositories:
