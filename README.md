@@ -23,16 +23,21 @@ dependencies {
 ```
 
 3. Add MulticolorBarView in your xml layout
+  a. Add namespace in your root view
+  ```xml
+    xmlns:multicolorbar="http://schemas.android.com/apk/res-auto"
+  ```
+  b. add MulticolorbarView xml
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        custom:title="Title 1"
-        custom:showLegend="true"
-        custom:multicolorBarSize="30dp"
-        custom:titleTextSize="20dp"
-        custom:legendTextSize="14dp"
+        multicolorbar:title="Your title here"
+        multicolorbar:showLegend="true"
+        multicolorbar:multicolorBarSize="30dp"
+        multicolorbar:titleTextSize="20dp"
+        multicolorbar:legendTextSize="14dp"
         android:layout_margin="5dp"
         android:layout_centerInParent="true"/>
 ```
