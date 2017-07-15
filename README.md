@@ -1,7 +1,7 @@
 # MulticolorBar
 A Subdivided Multicolor bar with legend for Android
 
-![Alt text](/multicolorbar.png?raw=true "Example screenshot")
+<img src="https://raw.githubusercontent.com/steven0529/MulticolorBar/master/multicolorbar.png" height=640 width=360 >
 
 # Usage
 1. Add it in your root build.gradle at the end of repositories:
@@ -23,16 +23,22 @@ dependencies {
 ```
 
 3. Add MulticolorBarView in your xml layout
+  
+ a. Add namespace in your root view
+ ```xml
+    xmlns:multicolorbar="http://schemas.android.com/apk/res-auto"
+ ```
+ b. add MulticolorbarView xml
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        custom:title="Title 1"
-        custom:showLegend="true"
-        custom:multicolorBarSize="30dp"
-        custom:titleTextSize="20dp"
-        custom:legendTextSize="14dp"
+        multicolorbar:title="Your title here"
+        multicolorbar:showLegend="true"
+        multicolorbar:multicolorBarSize="30dp"
+        multicolorbar:titleTextSize="20dp"
+        multicolorbar:legendTextSize="14dp"
         android:layout_margin="5dp"
         android:layout_centerInParent="true"/>
 ```
