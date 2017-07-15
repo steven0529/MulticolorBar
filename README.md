@@ -26,21 +26,19 @@ dependencies {
   
  a. Add namespace in your root view
  ```xml
-    xmlns:multicolorbar="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
  ```
  b. add MulticolorbarView xml
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        multicolorbar:title="Your title here"
-        multicolorbar:showLegend="true"
-        multicolorbar:multicolorBarSize="30dp"
-        multicolorbar:titleTextSize="20dp"
-        multicolorbar:legendTextSize="14dp"
-        android:layout_margin="5dp"
-        android:layout_centerInParent="true"/>
+        app:title="Your title here"
+        app:showLegend="true"
+        app:multicolorBarSize="30dp"
+        app:titleTextSize="20dp"
+        app:legendTextSize="14dp"/>
 ```
 
 4. Create adapter and extend MulticolorBarAdapter<?>, pass your own model as generics
