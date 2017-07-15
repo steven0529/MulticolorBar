@@ -23,11 +23,12 @@ dependencies {
 ```
 
 3. Add MulticolorBarView in your xml layout
-  a. Add namespace in your root view
-  ```xml
+  
+ a. Add namespace in your root view
+ ```xml
     xmlns:multicolorbar="http://schemas.android.com/apk/res-auto"
-  ```
-  b. add MulticolorbarView xml
+ ```
+ b. add MulticolorbarView xml
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
