@@ -30,6 +30,8 @@ dependencies {
  ```
  
     b. add MulticolorbarView xml
+    
+    
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
