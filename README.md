@@ -22,16 +22,12 @@ dependencies {
 }
 ```
 
-3. Add MulticolorBarView in your xml layout
-  
-    a. Add namespace in your root view
+3. Add namespace in your root view
  ```xml
     xmlns:app="http://schemas.android.com/apk/res-auto"
  ```
  
-    b. add MulticolorbarView xml
-    
-    
+4. add MulticolorbarView in your xml layout   
 ```xml
     <com.chuck.multicolorbar.MulticolorBarView
         android:id="@+id/multicolorBarView"
@@ -44,7 +40,7 @@ dependencies {
         app:legendTextSize="14dp"/>
 ```
 
-4. Create adapter and extend MulticolorBarAdapter<?>, pass your own model as generics
+5. Create adapter and extend MulticolorBarAdapter<?>, pass your own model as generics
 ```java
   public class FileSizeAdapter extends MulticolorBarAdapter<FileCategory> {
 
@@ -79,7 +75,7 @@ dependencies {
 }
 ```
 
-5. Reference multicolorBarView in your activity/fragment and set MulticolorAdapter
+6. Reference multicolorBarView in your activity/fragment and set MulticolorAdapter
 ```java
         MulticolorBarView multicolorBar = (MulticolorBarView) findViewById(R.id.multicolorBarView);
 
@@ -94,12 +90,12 @@ dependencies {
         multicolorBar.setMulticolorBarAdapter(new FileSizeAdapter(fileCategories));
 ```
 
-6. [Optional] Add legend value formatter
+7. [Optional] Add legend value formatter
 ```java
         multicolorBar.setItemValueFormatter(new FileSizeValueFormatter(Locale.US));
 ```
 
-7. [Optional] Set a max value
+8. [Optional] Set a max value
 ```java
         multicolorBar.setMaxValue(250);
 ```
