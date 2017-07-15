@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Steven Reyes (sreyes@stratpoint.com) on 12/07/2017
  */
 
-public class MulticolorBar extends View {
+class MulticolorBar extends View {
 
     private MulticolorBarAdapter multicolorBarAdapter;
     private Rect viewRect;
