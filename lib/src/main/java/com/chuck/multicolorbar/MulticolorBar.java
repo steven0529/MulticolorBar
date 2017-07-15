@@ -10,9 +10,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Steven Reyes (sreyes@stratpoint.com) on 12/07/2017
@@ -20,14 +19,15 @@ import java.util.Map;
 
 public class MulticolorBar extends View {
 
-//    private List<MulticolorBarItem> items;
     private MulticolorBarAdapter multicolorBarAdapter;
     private Rect viewRect;
     private Paint paint;
 
-    private Map<MulticolorBarItem, Rect> itemsMap;
-    private Paint backgroundPaint;
-    private int max = 0;
+    private List<Rect> itemsRect;
+    private Rect mBackgroundRect;
+    private Paint mBackgroundPaint;
+    private boolean mHasDefinedMax = false;
+    private int mMax = 0;
     private int mWidth;
     private int mHeight;
 
@@ -42,36 +42,35 @@ public class MulticolorBar extends View {
     }
 
     private void init() {
-//        this.items = new ArrayList<>();
-        this.itemsMap = new HashMap<>();
-        this.backgroundPaint = new Paint();
-        this.backgroundPaint.setARGB(255, 116, 116, 117);
+        this.itemsRect = new ArrayList<>();
+        this.mBackgroundPaint = new Paint();
+        this.mBackgroundPaint.setColor(Color.parseColor("#bababa"));
         this.paint = new Paint();
         this.viewRect = new Rect(getLeft(), getTop(), mWidth, mHeight);
+        this.mBackgroundRect = new Rect(getLeft(), getTop(), mWidth, mHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(viewRect, backgroundPaint);
+        canvas.drawRect(viewRect, mBackgroundPaint);
+        List<MulticolorBarItem> multicolorBarItemList = multicolorBarAdapter.getMulticolorBarItems();
+        for (int i = 0; i < multicolorBarItemList.size(); i++) {
+            MulticolorBarItem item = multicolorBarItemList.get(i);
 
-        MulticolorBarItem prevItem = null;
-        int idx = 0;
-        for (MulticolorBarItem item: itemsMap.keySet()) {
             paint.setColor(Color.parseColor(item.getColorHex()));
-            Rect rect;
-            if (idx == 0) {
-                rect = itemsMap.get(item);
+            Rect rect = itemsRect.get(i);
+            if (i == 0) {
                 rect.right = computeItemDrawWidth(item);
+            } else if (i == multicolorBarItemList.size() && mHasDefinedMax) {
+                rect.left = itemsRect.get(i - 1).right;
+                rect.right = itemsRect.get(i - 1).right + mBackgroundRect.right;
             } else {
-                rect = itemsMap.get(item);
-                rect.left = itemsMap.get(prevItem).right;
-                rect.right = itemsMap.get(prevItem).right + computeItemDrawWidth(item);
+                rect.left = itemsRect.get(i - 1).right;
+                rect.right = itemsRect.get(i - 1).right + computeItemDrawWidth(item);
             }
             rect.bottom = mHeight;
             canvas.drawRect(rect, paint);
-            prevItem = item;
-            idx++;
         }
     }
 
@@ -82,17 +81,19 @@ public class MulticolorBar extends View {
         setMeasuredDimension(mWidth, mHeight);
         viewRect.right = mWidth;
         viewRect.bottom = mHeight;
+        mBackgroundRect.right = mWidth;
+        mBackgroundRect.bottom = mHeight;
     }
 
     private int computeItemDrawWidth(MulticolorBarItem item) {
         int drawWidth;
-        double scale = (double) mWidth / max;
+        double scale = (double) mWidth / mMax;
         drawWidth = (int) (item.getItemValue() * scale);
         return drawWidth;
     }
 
     public void setBackgroundColor(String color) {
-        this.backgroundPaint.setColor(Color.parseColor(color));
+        this.mBackgroundPaint.setColor(Color.parseColor(color));
     }
 
     public MulticolorBarAdapter getMulticolorBarAdapter() {
@@ -105,26 +106,24 @@ public class MulticolorBar extends View {
 
     public void setMulticolorBarAdapter(MulticolorBarAdapter multicolorBarAdapter) {
         this.multicolorBarAdapter = multicolorBarAdapter;
-        this.itemsMap.clear();
-        if (max == 0) {
+        this.itemsRect.clear();
+        if (mMax == 0) {
             for (int i = 0; i < multicolorBarAdapter.getMulticolorBarItems().size(); i++) {
                 MulticolorBarItem item = (MulticolorBarItem) multicolorBarAdapter.getMulticolorBarItems().get(i);
-                max += item.getItemValue();
+                mMax += item.getItemValue();
             }
         }
         for (int i = 0; i < multicolorBarAdapter.getMulticolorBarItems().size(); i++) {
-            MulticolorBarItem item = (MulticolorBarItem) multicolorBarAdapter.getMulticolorBarItems().get(i);
-            itemsMap.put(item, new Rect(0, 0, 0, mHeight));
+            itemsRect.add(new Rect(0, 0, 0, mHeight));
         }
         invalidate();
     }
 
-    public int getMax() {
-        return max;
-    }
-
     public void setMax(int max) {
-        this.max = max;
+        this.mMax = max;
     }
 
+    public void setHasDefinedMax(boolean hasDefinedMax) {
+        this.mHasDefinedMax = hasDefinedMax;
+    }
 }

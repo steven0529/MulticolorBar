@@ -20,6 +20,7 @@ public class MulticolorBarView extends LinearLayout {
 
     private TextView tvTitle;
     private MulticolorBar multicolorBar;
+    private ItemValueFormatter itemValueFormatter;
     private boolean mShowLegend;
 
     public MulticolorBarView(Context context, AttributeSet attrs) {
@@ -59,9 +60,18 @@ public class MulticolorBarView extends LinearLayout {
         addView(multicolorBar, multicolorBarLayoutParams);
     }
 
+    public void setMaxValue(int max) {
+        this.multicolorBar.setMax(max);
+        this.multicolorBar.setHasDefinedMax(true);
+    }
+
     public void setShowLegend(boolean mShowLegend) {
         this.mShowLegend = mShowLegend;
         displayLegend();
+    }
+
+    public void setItemValueFormatter(ItemValueFormatter itemValueFormatter) {
+        this.itemValueFormatter = itemValueFormatter;
     }
 
     public void setMulticolorBarAdapter(MulticolorBarAdapter multicolorBarAdapter) {
@@ -71,14 +81,20 @@ public class MulticolorBarView extends LinearLayout {
 
     private void displayLegend() {
         if (mShowLegend) {
+            LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             for (int i = 0; i < multicolorBar.getMulticolorBarAdapter().getMulticolorBarItems().size(); i++) {
                 MulticolorBarItem item = (MulticolorBarItem) multicolorBar
                         .getMulticolorBarAdapter().getMulticolorBarItems().get(i);
-                LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View view = inflater.inflate(R.layout.item_legend, null);
                 TextView tvItemName = (TextView) view.findViewById(R.id.tv_item_name);
-                tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + ") "
-                        + item.getUnit());
+                if (itemValueFormatter != null) {
+                    tvItemName.setText(item.getItemName() + " ("
+                            + itemValueFormatter.formatItemValue(item.getItemValue()) + ") "
+                            + item.getUnit());
+                } else {
+                    tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + ") "
+                            + item.getUnit());
+                }
                 ImageView ivItemColor = (ImageView) view.findViewById(R.id.iv_item_colorbox);
                 ivItemColor.setBackgroundColor(Color.parseColor(item.getColorHex()));
                 addView(view);

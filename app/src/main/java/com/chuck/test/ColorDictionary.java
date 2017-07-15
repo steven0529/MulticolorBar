@@ -15,11 +15,11 @@ public class ColorDictionary {
     };
 
     private static final String[] happyColorsArray = new String[] {
-            "FA5F5E", "5EACEC", "F4D851", "C11FD7", "F2B0B1", "DD6133", "45362F"
+            "FA5F5E", "5EACEC", "F4D851", "C11FD7", "F2B0B1", "5CAD56", "DD6133", "45362F"
     };
 
     public static String getColorByIndex(int index) {
-        int indexModulus = index % 5;
+        int indexModulus = index % happyColorsArray.length;
         return happyColorsArray[indexModulus];
     }
 

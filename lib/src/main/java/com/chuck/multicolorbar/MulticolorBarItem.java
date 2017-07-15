@@ -6,7 +6,7 @@ package com.chuck.multicolorbar;
 
 public interface MulticolorBarItem {
 
-    int getItemValue();
+    double getItemValue();
     String getItemName();
     String getColorHex();
     String getUnit();

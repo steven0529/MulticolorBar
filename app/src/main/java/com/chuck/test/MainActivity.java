@@ -7,6 +7,7 @@ import com.chuck.multicolorbar.MulticolorBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,19 +17,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MulticolorBarView multicolorBar = (MulticolorBarView) findViewById(R.id.multicolorBarView);
 
-        List<Product> products = new ArrayList<>();
-        products.add(new Product("Prod 1", 1800, "bags", "#" + ColorDictionary.getColorByIndex(0)));
-        products.add(new Product("Prod 2", 2098, "bags", "#" + ColorDictionary.getColorByIndex(1)));
-        products.add(new Product("Prod 3", 10245, "bags", "#" + ColorDictionary.getColorByIndex(2)));
-        products.add(new Product("Prod 4", 3278, "bags", "#" + ColorDictionary.getColorByIndex(3)));
-        products.add(new Product("Prod 5", 3000, "bags", "#" + ColorDictionary.getColorByIndex(4)));
-        products.add(new Product("Prod 6", 2000, "bags", "#" + ColorDictionary.getColorByIndex(5)));
-        multicolorBar.setMulticolorBarAdapter(new ProductAdapter(products));
+        List<FileCategory> fileCategories = new ArrayList<>();
+        fileCategories.add(new FileCategory("Documents", 6.251, "GB", "#FA5F5E"));
+        fileCategories.add(new FileCategory("Music", 17.6126, "GB", "#5EACEC"));
+        fileCategories.add(new FileCategory("Videos", 54.12, "GB", "#F4D851"));
+        fileCategories.add(new FileCategory("Downloads", 31.8, "GB", "#C11FD7"));
+        fileCategories.add(new FileCategory("Apps", 77.1, "GB", "#FFAB51"));
+        fileCategories.add(new FileCategory("Others", 22.3, "GB", "#5CAD56"));
 
-        int total = 0;
-        for (Product product : products) {
-            total += product.getSalesVolume();
+        multicolorBar.setMaxValue(250);
+        multicolorBar.setItemValueFormatter(new FileSizeValueFormatter(Locale.US));
+        multicolorBar.setMulticolorBarAdapter(new FileSizeAdapter(fileCategories));
+
+        double total = 0;
+        for (FileCategory fileCategory : fileCategories) {
+            total += fileCategory.getFileSize();
         }
-        multicolorBar.setTitle(total + "");
+        multicolorBar.setTitle(String.format(Locale.US, "%.2f", total) + " GB of 250.0 GB" );
     }
 }

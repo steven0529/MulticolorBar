@@ -4,16 +4,16 @@ package com.chuck.test;
  * Created by Steven Reyes (sreyes@stratpoint.com) on 13/07/2017
  */
 
-public class Product {
+public class FileCategory {
 
     private String name;
-    private int salesVolume;
+    private double fileSize;
     private String unit;
     private String color;
 
-    public Product(String name, int salesVolume, String unit, String color) {
+    public FileCategory(String name, double fileSize, String unit, String color) {
         this.name = name;
-        this.salesVolume = salesVolume;
+        this.fileSize = fileSize;
         this.unit = unit;
         this.color = color;
     }
@@ -26,12 +26,12 @@ public class Product {
         this.name = name;
     }
 
-    public int getSalesVolume() {
-        return salesVolume;
+    public double getFileSize() {
+        return fileSize;
     }
 
-    public void setSalesVolume(int salesVolume) {
-        this.salesVolume = salesVolume;
+    public void setFileSize(double fileSize) {
+        this.fileSize = fileSize;
     }
 
     public String getUnit() {
