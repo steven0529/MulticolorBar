@@ -124,8 +124,9 @@ public class MulticolorBarView extends LinearLayout {
     }
 
     public void clearItems() {
-        removeAllViews();
-        init(getContext(), attributeSet);
+        for (int i = getChildCount() - 1 ; i > 1; i--) {
+            removeViewAt(i);
+        }
         requestLayout();
     }
 
