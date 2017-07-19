@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class MulticolorBarView extends LinearLayout {
 
+    private AttributeSet attributeSet;
     private TextView tvTitle;
     private MulticolorBar multicolorBar;
     private ItemValueFormatter itemValueFormatter;
@@ -26,11 +27,13 @@ public class MulticolorBarView extends LinearLayout {
     public MulticolorBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
+        this.attributeSet = attrs;
     }
 
     public MulticolorBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
+        this.attributeSet = attrs;
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -118,6 +121,11 @@ public class MulticolorBarView extends LinearLayout {
                 addView(view);
             }
         }
+    }
+
+    public void clearItems() {
+        removeAllViews();
+        init(getContext(), attributeSet);
     }
 
     public void setTitle(String title) {
