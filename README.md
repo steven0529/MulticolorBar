@@ -18,7 +18,7 @@ allprojects {
 2. Add the dependency
 ```groovy
 dependencies {
-    compile 'com.github.steven0529:MulticolorBar:0.3.1'
+    compile 'com.github.steven0529:MulticolorBar:0.3.4'
 }
 ```
 
