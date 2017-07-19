@@ -126,6 +126,7 @@ public class MulticolorBarView extends LinearLayout {
     public void clearItems() {
         removeAllViews();
         init(getContext(), attributeSet);
+        requestLayout();
     }
 
     public void setTitle(String title) {
