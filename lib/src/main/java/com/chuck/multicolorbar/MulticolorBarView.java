@@ -110,11 +110,11 @@ public class MulticolorBarView extends LinearLayout {
                 TextView tvItemName = (TextView) view.findViewById(R.id.tv_item_name);
                 if (itemValueFormatter != null) {
                     tvItemName.setText(item.getItemName() + " ("
-                            + itemValueFormatter.formatItemValue(item.getItemValue()) + ") "
-                            + item.getUnit());
+                            + itemValueFormatter.formatItemValue(item.getItemValue()) + " " + item.getUnit()
+                            + ")");
                 } else {
-                    tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + ") "
-                            + item.getUnit());
+                    tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + " " +  item.getUnit()
+                            + ")");
                 }
                 ImageView ivItemColor = (ImageView) view.findViewById(R.id.iv_item_colorbox);
                 ivItemColor.setBackgroundColor(Color.parseColor(item.getColorHex()));
