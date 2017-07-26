@@ -146,4 +146,7 @@ public class MulticolorBarView extends LinearLayout {
         tvTitle.setText(title);
     }
 
+    public MulticolorBar getMulticolorBar() {
+        return multicolorBar;
+    }
 }
