@@ -22,7 +22,7 @@ public class MulticolorBarView extends LinearLayout {
     private TextView tvTitle;
     private MulticolorBar multicolorBar;
     private ItemValueFormatter itemValueFormatter;
-    private boolean mShowLegend;
+    private boolean mShowLegend, mShowBar, mShowTitle;
 
     public MulticolorBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,9 +53,21 @@ public class MulticolorBarView extends LinearLayout {
         multicolorBarLayoutParams.setMargins(0, 20, 0, 20);
 
         mShowLegend = typedArray.getBoolean(R.styleable.MulticolorBarView_showLegend, false);
+        mShowBar = typedArray.getBoolean(R.styleable.MulticolorBarView_showBar, true);
+        mShowTitle = typedArray.getBoolean(R.styleable.MulticolorBarView_showTitle, true);
 
         addView(tvTitle, titleLayoutParams);
         addView(multicolorBar, multicolorBarLayoutParams);
+
+        if (mShowTitle)
+            tvTitle.setVisibility(VISIBLE);
+        else
+            tvTitle.setVisibility(GONE);
+
+        if (mShowBar)
+            multicolorBar.setVisibility(VISIBLE);
+        else
+            multicolorBar.setVisibility(GONE);
     }
 
     public void setMaxValue(int max) {

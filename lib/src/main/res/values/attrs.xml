@@ -4,6 +4,8 @@
         <attr name="title" format="string"/>
         <attr name="multicolorBarSize" format="dimension"/>
         <attr name="titleTextSize" format="dimension"/>
+        <attr name="showTitle" format="boolean"/>
+        <attr name="showBar" format="boolean"/>
         <attr name="showLegend" format="boolean"/>
         <attr name="legendTextSize" format="dimension"/>
         <attr name="titleMargin" format="dimension"/>
