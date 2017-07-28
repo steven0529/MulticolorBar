@@ -78,13 +78,16 @@ public class MulticolorBarView extends LinearLayout {
 
     public void setShowLegend(boolean mShowLegend) {
         this.mShowLegend = mShowLegend;
-        displayLegend(mShowLegendUnits);
+        if (multicolorBar.getMulticolorBarAdapter() !=  null)
+            displayLegend(mShowLegendUnits);
     }
 
     public void setmShowLegendUnits(boolean mShowLegendUnits) {
         this.mShowLegendUnits = mShowLegendUnits;
-        clearItems();
-        displayLegend(mShowLegendUnits);
+        if (multicolorBar.getMulticolorBarAdapter() !=  null) {
+            clearItems();
+            displayLegend(mShowLegendUnits);
+        }
     }
 
     public void setItemValueFormatter(ItemValueFormatter itemValueFormatter) {
