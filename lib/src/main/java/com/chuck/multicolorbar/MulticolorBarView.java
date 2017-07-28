@@ -22,7 +22,7 @@ public class MulticolorBarView extends LinearLayout {
     private TextView tvTitle;
     private MulticolorBar multicolorBar;
     private ItemValueFormatter itemValueFormatter;
-    private boolean mShowLegend, mShowBar, mShowTitle;
+    private boolean mShowLegend, mShowBar, mShowTitle, mShowLegendUnits;
 
     public MulticolorBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,6 +55,7 @@ public class MulticolorBarView extends LinearLayout {
         mShowLegend = typedArray.getBoolean(R.styleable.MulticolorBarView_showLegend, false);
         mShowBar = typedArray.getBoolean(R.styleable.MulticolorBarView_showBar, true);
         mShowTitle = typedArray.getBoolean(R.styleable.MulticolorBarView_showTitle, true);
+        mShowLegendUnits = typedArray.getBoolean(R.styleable.MulticolorBarView_showLegendUnits, true);
 
         addView(tvTitle, titleLayoutParams);
         addView(multicolorBar, multicolorBarLayoutParams);
@@ -77,7 +78,13 @@ public class MulticolorBarView extends LinearLayout {
 
     public void setShowLegend(boolean mShowLegend) {
         this.mShowLegend = mShowLegend;
-        displayLegend();
+        displayLegend(mShowLegendUnits);
+    }
+
+    public void setmShowLegendUnits(boolean mShowLegendUnits) {
+        this.mShowLegendUnits = mShowLegendUnits;
+        clearItems();
+        displayLegend(mShowLegendUnits);
     }
 
     public void setItemValueFormatter(ItemValueFormatter itemValueFormatter) {
@@ -86,7 +93,7 @@ public class MulticolorBarView extends LinearLayout {
 
     public void setMulticolorBarAdapter(MulticolorBarAdapter multicolorBarAdapter) {
         multicolorBar.setMulticolorBarAdapter(multicolorBarAdapter);
-        displayLegend();
+        displayLegend(mShowLegendUnits);
     }
 
     private LayoutParams applyTitleAttributeSet(Context context, AttributeSet attrs) {
@@ -112,7 +119,7 @@ public class MulticolorBarView extends LinearLayout {
         return titleLayoutParams;
     }
 
-    private void displayLegend() {
+    private void displayLegend(boolean showUnits) {
         if (mShowLegend) {
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             for (int i = 0; i < multicolorBar.getMulticolorBarAdapter().getMulticolorBarItems().size(); i++) {
@@ -120,13 +127,19 @@ public class MulticolorBarView extends LinearLayout {
                         .getMulticolorBarAdapter().getMulticolorBarItems().get(i);
                 View view = inflater.inflate(R.layout.item_legend, null);
                 TextView tvItemName = (TextView) view.findViewById(R.id.tv_item_name);
-                if (itemValueFormatter != null) {
-                    tvItemName.setText(item.getItemName() + " ("
-                            + itemValueFormatter.formatItemValue(item.getItemValue()) + " " + item.getUnit()
-                            + ")");
+                if (showUnits) {
+                    if (itemValueFormatter != null)
+                        tvItemName.setText(item.getItemName() + " ("
+                                + itemValueFormatter.formatItemValue(item.getItemValue()) + " " + item.getUnit()
+                                + ")");
+                    else
+                        tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + " " + item.getUnit()
+                                + ")");
                 } else {
-                    tvItemName.setText(item.getItemName() + " (" + item.getItemValue() + " " +  item.getUnit()
-                            + ")");
+                    if (itemValueFormatter != null)
+                        tvItemName.setText(item.getItemName());
+                    else
+                        tvItemName.setText(item.getItemName());
                 }
                 ImageView ivItemColor = (ImageView) view.findViewById(R.id.iv_item_colorbox);
                 ivItemColor.setBackgroundColor(Color.parseColor(item.getColorHex()));

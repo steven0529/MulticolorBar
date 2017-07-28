@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         multicolorBar.setMaxValue(250);
         multicolorBar.setItemValueFormatter(new FileSizeValueFormatter(Locale.US));
         multicolorBar.setMulticolorBarAdapter(new FileSizeAdapter(fileCategories));
+        multicolorBar.setmShowLegendUnits(false);
 
         double total = 0;
         for (FileCategory fileCategory : fileCategories) {

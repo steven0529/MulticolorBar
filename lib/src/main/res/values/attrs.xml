@@ -7,6 +7,7 @@
         <attr name="showTitle" format="boolean"/>
         <attr name="showBar" format="boolean"/>
         <attr name="showLegend" format="boolean"/>
+        <attr name="showLegendUnits" format="boolean"/>
         <attr name="legendTextSize" format="dimension"/>
         <attr name="titleMargin" format="dimension"/>
         <attr name="titleMarginTop" format="dimension"/>
